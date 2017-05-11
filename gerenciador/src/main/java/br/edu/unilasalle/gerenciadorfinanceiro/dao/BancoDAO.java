@@ -58,4 +58,5 @@ public class BancoDAO {
 		entityManager.close();
 		return banco;
 	}
+	
 }

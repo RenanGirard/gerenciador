@@ -1,4 +1,4 @@
-package com.edu.unilasalle.gerenciador;
+package br.edu.unilasalle.gerenciador;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

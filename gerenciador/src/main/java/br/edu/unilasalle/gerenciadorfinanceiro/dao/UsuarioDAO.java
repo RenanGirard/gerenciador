@@ -54,9 +54,9 @@ public class UsuarioDAO {
 	}
 
 	public void delete(Usuario usuario) {
-		// TODO Auto-generated method stub
 		EntityManager entityManager = HibernateUtil.getEntityManager();
 		entityManager.getTransaction().begin();
+		usuario = (Usuario) entityManager.find(Usuario.class, usuario.getId()); 
 		entityManager.remove(usuario);
 		entityManager.getTransaction().commit();
 		entityManager.close();

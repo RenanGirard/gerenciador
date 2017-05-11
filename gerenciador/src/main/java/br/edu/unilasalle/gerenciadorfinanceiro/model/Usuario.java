@@ -1,21 +1,16 @@
 package br.edu.unilasalle.gerenciadorfinanceiro.model;
 
-import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="USUARIOS")
-@SequenceGenerator(name= "USUARIOS_SEQUENCE", sequenceName = "USUARIOS_SEQ", initialValue=1, allocationSize = 1)
+@SequenceGenerator(name= "USUARIOS_SEQUENCE", sequenceName = "USUARIOS_SEQ", initialValue=2, allocationSize = 1)
 public class Usuario {
 
 	@Id
@@ -32,13 +27,13 @@ public class Usuario {
 	@Column(name="SENHA")
 	private String senha;
 
-	@OneToMany
+/*	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="CONTA_ID", foreignKey=@ForeignKey(name="CONTA_USUARIO_FK"))
 	private Collection<Conta> contas;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="LANCAMENTO_ID", foreignKey=@ForeignKey(name="LANCAMENTO_USUARIO_FK"))
-	private Collection<Lancamento>  lancamento;
+	private Collection<Lancamento>  lancamento;*/
 	
 	public Long getId() {
 		return id;
@@ -72,7 +67,7 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public Collection<Conta> getContas() {
+/*	public Collection<Conta> getContas() {
 		return contas;
 	}
 
@@ -86,6 +81,6 @@ public class Usuario {
 
 	public void setLancamento(Collection<Lancamento> lancamento) {
 		this.lancamento = lancamento;
-	}
+	}*/
 
 }
