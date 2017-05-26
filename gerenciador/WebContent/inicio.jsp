@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,18 +11,22 @@
 <title>Insert title here</title>
 </head>
 <body class="well">
+	<ul class="nav nav-pills">
+		<li role="presentation" class="active"><a href="LogoutController">Sair</a></li>
+	</ul>
 	<div class="panel-body" align="center">
 		<h1>Gerenciador Financeiro</h1>
 		<h3>O Seu Gerenciador Financeiro!</h3>
-		
+		<h3>Bem Vindo ${LoginController.user.nomeCompleto}</h3>
 	</div>
 	<h2>Opções</h2>
-	<form action="login.jsp">
-			<div class="btn-group-vertical" role="group" aria-label="...">
-				<button type="submit" class="btn btn-default">Cadastro de Usuários</button>
-				<button type="submit" class="btn btn-default">Cadastro de Bancos</button>
-				<button type="submit" class="btn btn-default">Cadastro de Categorias</button>
-			</div>
-		</form>
+	<form action="UsuarioController">
+		<div class="btn-group-vertical" role="group" aria-label="...">
+			<a href="UsuarioController?" class="btn btn-info" role="button">Cadastro
+				de Usuários</a><a href="CategoriaController?" class="btn btn-info"
+				role="button">Cadastro de Categorias</a><a href="BancoController?"
+				class="btn btn-info" role="button">Cadastro de Bancos</a>
+		</div>
+	</form>
 </body>
 </html>
