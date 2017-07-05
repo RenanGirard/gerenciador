@@ -1,5 +1,6 @@
 package br.edu.unilasalle.gerenciadorfinanceiro.controller;
 
+
 import java.io.IOException;
 import java.util.List;
 
@@ -11,26 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.edu.unilasalle.gerenciadorfinanceiro.beans.CategoriaBean;
-import br.edu.unilasalle.gerenciadorfinanceiro.beans.CategoriaBeanList;
 import br.edu.unilasalle.gerenciadorfinanceiro.beans.UsuarioBean;
 import br.edu.unilasalle.gerenciadorfinanceiro.beans.UsuarioBeanList;
-import br.edu.unilasalle.gerenciadorfinanceiro.dao.CategoriaDAO;
 import br.edu.unilasalle.gerenciadorfinanceiro.dao.UsuarioDAO;
-import br.edu.unilasalle.gerenciadorfinanceiro.model.Categoria;
 import br.edu.unilasalle.gerenciadorfinanceiro.model.Usuario;
 
 /**
  * Servlet implementation class UsuarioController
  */
-@WebServlet("/CategoriaController")
-public class CategoriaController extends HttpServlet {
+@WebServlet("/UserController")
+public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CategoriaController() {
+	public UserController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -53,57 +50,57 @@ public class CategoriaController extends HttpServlet {
 
 		HttpSession httpSession = request.getSession();
 		Usuario usuarioConectado = (Usuario) httpSession.getAttribute("usuarioLogado");
-		
 		if (usuarioConectado == null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 			dispatcher.forward(request, response);
 		} else {
 			String action = request.getParameter("action");
-			Categoria categoria = null;
+			Usuario usuario = null;
 			if (action != null) {
-				String id = request.getParameter("f_categoriaId");
-				CategoriaDAO categoriaDAO = new CategoriaDAO();
+				String id = request.getParameter("f_userid");
+				UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 				if (id != null && id != "") {
-					categoria = categoriaDAO.selectById(new Long(id));
+					usuario = usuarioDAO.selectById(new Long(id));
 				} else {
-					categoria = new Categoria();
+					usuario = new Usuario();
 				}
 				if (action.equals("Salvar")) {
-					String nomeCategoria = request.getParameter("f_nomeCategoria");
-					String complementoCategoria = request.getParameter("f_categoriaComplemento");
-					categoria.setNome(nomeCategoria);
-					categoria.setComplemento(complementoCategoria);
-
-					if (categoria.getId() == null) {
-						categoriaDAO.insert(categoria);
+					String nomeCompleto = request.getParameter("f_completeusername");
+					String nomeUsuario = request.getParameter("f_username");
+					String senha = request.getParameter("f_senha");
+					usuario.setNomeCompleto(nomeCompleto);
+					usuario.setNomeUsuario(nomeUsuario);
+					usuario.setSenha(senha);
+					if (usuario.getId() == null) {
+						usuarioDAO.insert(usuario);
 					} else {
-						categoriaDAO.update(categoria);
+						usuarioDAO.update(usuario);
 					}
-					categoria = null;
+					usuario = null;
 				} else {
 					if (action.equals("Excluir")) {
-						categoriaDAO.delete(categoria);
-						categoria = null;
+						usuarioDAO.delete(usuario);
+						usuario = null;
 					}
 				}
 			}
 
-			CategoriaBean categoriaBean = null;
-			if (categoria != null) {
-				categoriaBean = new CategoriaBean();
-				categoriaBean.setId(categoria.getId());
-				categoriaBean.setNome(categoria.getNome());
-				categoriaBean.setComplemento(categoria.getComplemento());
+			UsuarioBean usuarioBean = null;
+			if (usuario != null) {
+				usuarioBean = new UsuarioBean();
+				usuarioBean.setId(usuario.getId());
+				usuarioBean.setNomeCompleto(usuario.getNomeCompleto());
+				usuarioBean.setNomeUsuario(usuario.getNomeUsuario());
+				usuarioBean.setSenha(usuario.getSenha());
 			}
 
-			CategoriaDAO categoriaDAO = new CategoriaDAO();
-			List<Categoria> categorias = categoriaDAO.selectAll();
-			CategoriaBeanList categoriaBeanList = new CategoriaBeanList(categorias);
-			
-			request.setAttribute("categoriaBean", categoriaBean);
-			request.setAttribute("categoriaBeanList", categoriaBeanList);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("jspPages/cadastraCategoria.jsp");
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			List<Usuario> usuarios = usuarioDAO.selectAll();
+			UsuarioBeanList usuarioBeanList = new UsuarioBeanList(usuarios);
+			request.setAttribute("usuarioBean", usuarioBean);
+			request.setAttribute("usuarioBeanList", usuarioBeanList);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("jspPages/cadastraUsuario.jsp");
 			dispatcher.forward(request, response);
 		}
 

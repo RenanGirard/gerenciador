@@ -14,8 +14,8 @@ public class UsuarioBeanList {
 	
 	public UsuarioBeanList(List<Usuario> usuariosList) {
 		for (Usuario usuario : usuariosList){
-			usuariosBeanList.add(new UsuarioBean(usuario.getId(),usuario.getNomeCompleto()
-					, usuario.getNomeUsuario(), usuario.getSenha()));
+			usuariosBeanList.add(new UsuarioBean(usuario.getId(),usuario.getNomeUsuario()
+					, usuario.getNomeCompleto(), usuario.getSenha()));
 		}
 	}
 

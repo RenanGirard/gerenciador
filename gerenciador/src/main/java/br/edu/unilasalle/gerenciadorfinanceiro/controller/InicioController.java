@@ -2,6 +2,7 @@ package br.edu.unilasalle.gerenciadorfinanceiro.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,17 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.edu.unilasalle.gerenciadorfinanceiro.model.Usuario;
+
 /**
- * Servlet implementation class LogoutController
+ * Servlet implementation class InicioController
  */
-@WebServlet("/LogoutController")
-public class LogoutController extends HttpServlet {
+@WebServlet("/InicioController")
+public class InicioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LogoutController() {
+	public InicioController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -41,9 +44,14 @@ public class LogoutController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		session.setAttribute("usuarioLogado", null);
-		request.getRequestDispatcher("/login.jsp").forward(request, response);
+		HttpSession httpSession = request.getSession();
+		Usuario usuarioConectado = (Usuario) httpSession.getAttribute("usuarioLogado");
+		if (usuarioConectado == null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			request.getRequestDispatcher("/inicio.jsp").forward(request, response);
+		}
 	}
 
 }

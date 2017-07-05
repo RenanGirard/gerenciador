@@ -11,11 +11,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import br.edu.unilasalle.gerenciadorfinanceiro.dao.util.HibernateUtil;
 import br.edu.unilasalle.gerenciadorfinanceiro.model.Usuario;
+import br.edu.unilasalle.gerenciadorfinanceiro.util.HibernateUtil;
 
 public class UsuarioDAO {
-
+		
 	public Usuario selectByUserNameAndPassword(String userName, String password) {
 		Usuario usuario = null;
 		EntityManager em = HibernateUtil.getEntityManager();
@@ -67,7 +67,7 @@ public class UsuarioDAO {
 		List<Usuario> usuarios = null;
 		EntityManager entityManager = HibernateUtil.getEntityManager();
 		entityManager.getTransaction().begin();
-		usuarios = entityManager.createQuery("from Usuario").getResultList();
+		usuarios = entityManager.createNamedQuery("AllUsuario").getResultList();
 		entityManager.getTransaction().commit();
 		entityManager.close();
 		return usuarios;

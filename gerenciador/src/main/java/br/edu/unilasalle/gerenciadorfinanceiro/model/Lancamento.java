@@ -40,19 +40,19 @@ public class Lancamento {
 
 	@Column(name = "FIXO")
 	private Boolean fixo;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "USUARIO_ID", foreignKey = @ForeignKey(name = "USUARIO_LANCAMENTO_FK"))
 	private Usuario usuario;
 
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "CONTA_ID", foreignKey = @ForeignKey(name = "CONTA_LANCAMENTO_FK"))
 	private Conta conta;
 
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "CATEGORIA_ID", foreignKey = @ForeignKey(name = "CATEGORIA_LANCAMENTO_FK"))
 	private Categoria categoria;
-	
+
 	@OneToMany
 	@JoinColumn(name = "USUARIO_ID", foreignKey = @ForeignKey(name = "USUARIO_LANCAMENTO_FK"))
 	private Collection<ItemLancamento> itens;

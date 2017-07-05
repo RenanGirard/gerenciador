@@ -48,11 +48,15 @@ public class UsuarioController extends HttpServlet {
 		try {
 			HttpSession sessao = request.getSession();
 			Usuario userLogado = (Usuario) sessao.getAttribute("usuarioLogado");
-
-			if (userLogado == null) {
+			userLogado = new Usuario();
+			userLogado.setId(new Long(1));
+			userLogado.setNomeCompleto("Renan Girard");
+			userLogado.setNomeUsuario("renan");
+			userLogado.setSenha("12345");
+			/*if (userLogado == null) {
 				throw new Exception();
-			}
-			
+			}*/
+
 			String action = request.getParameter("action");
 			Usuario usuario = null;
 			if (action != null) {
@@ -126,11 +130,10 @@ public class UsuarioController extends HttpServlet {
 					+ "<li role=\"presentation\" class=\"active\"><a href=\"LoginController?user="
 					+ userLogado.getNomeUsuario() + "&" + "password=" + userLogado.getSenha() + "\">Home</a></li></ul>"
 					+ "<form method=\"post\" action=\"UsuarioController\">" + "<h1 align=\"center\">FinancTool</h1>"
-					+ "<h2 align=\"center\">Cadastro de Usuários</h2>"
-					+ "<h5>Usuario Conectado: " + userLogado.getNomeCompleto() + "</h5>" + htmlPageCadastro
+					+ "<h2 align=\"center\">Cadastro de Usuários</h2>" + "<h5>Usuario Conectado: "
+					+ userLogado.getNomeCompleto() + "</h5>" + htmlPageCadastro
 					+ "<input type=\"submit\" name=\"action\" value=\"Salvar\"  class=\"btn btn-default\">" + "<hr>"
-					+ "<div class=\"panel panel-default\">"
-					+ "<table class=\"table\">"
+					+ "<div class=\"panel panel-default\">" + "<table class=\"table\">"
 					+ "<tr><td>Codigo</td><td>Nome Completo</td><td>Usuario</td><td></td><td></td></tr>";
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
 			List<Usuario> usuarios = usuarioDAO.selectAll();

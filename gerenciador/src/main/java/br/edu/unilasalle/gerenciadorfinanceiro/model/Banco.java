@@ -5,11 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="BANCOS")
+@NamedQuery(name="AllBancos", query="select b from Banco b")
 @SequenceGenerator(name= "BANCOS_SEQUENCE", sequenceName = "BANCOS_SEQ", initialValue=1, allocationSize = 1)
 public class Banco {
 	@Id

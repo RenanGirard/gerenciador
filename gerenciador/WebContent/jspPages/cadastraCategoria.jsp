@@ -12,6 +12,9 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
+
+
+
 <title>FinancTool - Cadastro de Usuários</title>
 
 </head>
@@ -23,28 +26,24 @@
 		<%@include file="../exemploJspPages/cabecalho.jsp"%>
 	</div>
 
-	<form method="post" action="UserController">
+	<form method="post" action="CategoriaController">
 		<div class="input-group">
 
 			<p>
-				Código: <input type="text" name="f_userid" readonly="true"
-					value="${usuarioBean.id}" class="form-control" />
+				Código: <input type="text" name="f_categoriaId" readonly="true"
+					value="${categoriaBean.id}" class="form-control" />
 			</p>
 
 			<p>
-				Nome Completo:<input type="text" name="f_completeusername"
-					value="${usuarioBean.nomeCompleto}" class="form-control" />
+				Categoria:<input type="text" name="f_nomeCategoria"
+					value="${categoriaBean.nome}" class="form-control" />
 			</p>
 
 			<p>
-				Usuario:<input type="text" name="f_username"
-					value="${usuarioBean.nomeUsuario}" class="form-control" />
+				Complemento:<input type="text" name="f_categoriaComplemento"
+					value="${categoriaBean.complemento}" class="form-control" />
 			</p>
 
-			<p>
-				Senha:<input type="password" name="f_senha"
-					value="${usuarioBean.senha}" class="form-control" />
-			</p>
 
 			<input type="submit" name="action" value="Salvar"
 				class="btn btn-default" />
@@ -61,9 +60,9 @@
 
 					<td>Código</td>
 
-					<td>Nome Completo</td>
+					<td>Categoria</td>
 
-					<td>Usuario</td>
+					<td>Complemento</td>
 
 					<td></td>
 
@@ -72,21 +71,22 @@
 				</tr>
 
 
-				<c:forEach items="${usuarioBeanList.usuariosBeanList}" var="usuario">
+				<c:forEach items="${categoriaBeanList.categoriasBeanList}"
+					var="categoria">
 
 					<tr>
 
-						<td>${usuario.id}</td>
+						<td>${categoria.id}</td>
 
-						<td>${usuario.nomeCompleto}</td>
+						<td>${categoria.nome}</td>
 
-						<td>${usuario.nomeUsuario}</td>
-
-						<td><a
-							href=UserController?action=Editar&f_userid=${usuario.id}>Editar</a></td>
+						<td>${categoria.complemento}</td>
 
 						<td><a
-							href=UserController?action=Excluir&f_userid=${usuario.id}>Excluir</a></td>
+							href=CategoriaController?action=Editar&f_categoriaId=${categoria.id}>Editar</a></td>
+
+						<td><a
+							href=CategoriaController?action=Excluir&f_categoriaId=${categoria.id}>Excluir</a></td>
 				</c:forEach>
 				</tr>
 			</table>
