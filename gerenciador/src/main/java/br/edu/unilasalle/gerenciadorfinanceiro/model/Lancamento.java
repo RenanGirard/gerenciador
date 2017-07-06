@@ -31,9 +31,16 @@ public class Lancamento {
 	@Column(name = "DESCRICAO")
 	private String descricao;
 
+	@Column(name = "TIPO")
+	private String tipo;
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_CRIACAO")
 	private Date dataDeCriacao;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DATA_LANCAMENTO")
+	private Date dataDeLancamento;
 
 	@Column(name = "VALOR_LANCAMENTO")
 	private BigDecimal valorLancamento;
@@ -127,6 +134,22 @@ public class Lancamento {
 
 	public void setItens(Collection<ItemLancamento> itens) {
 		this.itens = itens;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public Date getDataDeLancamento() {
+		return dataDeLancamento;
+	}
+
+	public void setDataDeLancamento(Date dataDeLancamento) {
+		this.dataDeLancamento = dataDeLancamento;
 	}
 
 }

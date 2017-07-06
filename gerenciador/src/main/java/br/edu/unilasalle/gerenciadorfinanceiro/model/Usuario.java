@@ -36,17 +36,18 @@ public class Usuario {
 	@Column(name = "SENHA")
 	private String senha;
 
-	/*@JoinColumn(name = "USUARIO_ID", foreignKey = @ForeignKey(name = "CONTA_USUARIO_FK"), nullable = false)*/
+	/*
+	 * @JoinColumn(name = "USUARIO_ID", foreignKey = @ForeignKey(name =
+	 * "CONTA_USUARIO_FK"), nullable = false)
+	 */
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
 	private Collection<Conta> contas;
 
-	/*
-	 * @OneToMany(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinColumn(name="LANCAMENTO_ID",
-	 * foreignKey=@ForeignKey(name="LANCAMENTO_USUARIO_FK")) private
-	 * Collection<Lancamento> lancamento;
-	 */
+	// @JoinColumn(name = "LANCAMENTO_ID", foreignKey = @ForeignKey(name =
+	// "LANCAMENTO_USUARIO_FK"))
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
+	private Collection<Lancamento> lancamentos;
+
 	public Long getId() {
 		return id;
 	}
@@ -85,6 +86,14 @@ public class Usuario {
 
 	public void setContas(Collection<Conta> contas) {
 		this.contas = contas;
+	}
+
+	public Collection<Lancamento> getLancamentos() {
+		return lancamentos;
+	}
+
+	public void setLancamento(Collection<Lancamento> lancamentos) {
+		this.lancamentos = lancamentos;
 	}
 
 }

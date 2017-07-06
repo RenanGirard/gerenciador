@@ -26,6 +26,7 @@
 					<li role="presentation"><a href="CategoriaController">Categorias</a></li>
 					<li role="presentation"><a href="BancoController">Bancos</a></li>
 					<li role="presentation"><a href="ContaController">Contas</a></li>
+					<li role="presentation"><a href="LancamentoController">Lançamentos</a></li>
 				</ul></li>
 
 		</ul>
