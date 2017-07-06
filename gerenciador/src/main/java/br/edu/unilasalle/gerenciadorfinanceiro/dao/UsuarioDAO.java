@@ -1,5 +1,6 @@
 package br.edu.unilasalle.gerenciadorfinanceiro.dao;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,11 +12,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import br.edu.unilasalle.gerenciadorfinanceiro.model.Conta;
 import br.edu.unilasalle.gerenciadorfinanceiro.model.Usuario;
 import br.edu.unilasalle.gerenciadorfinanceiro.util.HibernateUtil;
 
 public class UsuarioDAO {
-		
+
 	public Usuario selectByUserNameAndPassword(String userName, String password) {
 		Usuario usuario = null;
 		EntityManager em = HibernateUtil.getEntityManager();
@@ -56,7 +58,7 @@ public class UsuarioDAO {
 	public void delete(Usuario usuario) {
 		EntityManager entityManager = HibernateUtil.getEntityManager();
 		entityManager.getTransaction().begin();
-		usuario = (Usuario) entityManager.find(Usuario.class, usuario.getId()); 
+		usuario = (Usuario) entityManager.find(Usuario.class, usuario.getId());
 		entityManager.remove(usuario);
 		entityManager.getTransaction().commit();
 		entityManager.close();
@@ -82,6 +84,20 @@ public class UsuarioDAO {
 		entityManager.getTransaction().commit();
 		entityManager.close();
 		return usuario;
+	}
+
+	public List<Conta> selectContas(Long id) {
+
+		Usuario usuario = new Usuario();
+		EntityManager entityManager = HibernateUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+
+		usuario = entityManager.find(Usuario.class, id);
+		List<Conta> contaList = (List<Conta>) usuario.getContas();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		return contaList;
+
 	}
 
 }

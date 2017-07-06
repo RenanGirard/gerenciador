@@ -35,8 +35,9 @@ public class Usuario {
 	@Column(name = "SENHA")
 	private String senha;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "CONTA_ID", foreignKey = @ForeignKey(name = "CONTA_USUARIO_FK"))
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name = "USUARIO_ID", foreignKey = @ForeignKey(name = "CONTA_USUARIO_FK"),nullable=false)
 	private Collection<Conta> contas;
 
 	/*
