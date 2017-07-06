@@ -7,17 +7,19 @@ public class ContaBean {
 	private Long id;
 	private int numero;
 	private Banco banco;
+	private Usuario usuario;
 
 	public ContaBean() {
 		// TODO Auto-generated constructor stub
 		super();
 	}
 
-	public ContaBean(Long id, int numero, Banco banco) {
+	public ContaBean(Long id, int numero, Banco banco, Usuario usuario) {
 		super();
 		this.id = id;
 		this.numero = numero;
 		this.banco = banco;
+		this.usuario = usuario;
 	}
 
 	public Long getId() {
@@ -43,5 +45,14 @@ public class ContaBean {
 	public void setBanco(Banco banco) {
 		this.banco = banco;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 
 }

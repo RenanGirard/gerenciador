@@ -8,8 +8,8 @@ import br.edu.unilasalle.gerenciadorfinanceiro.model.Categoria;
 public class TesteCategorias {
 
 	public static void main(String[] args) {
-		String nomes[] = {"Transporte", "Transporte Particular", "Saude", "Lazer", "Refeição"};
-		String complementos[] = {"Despesa com transporte publico", "Despesa com transporte próprio", null, "Atividades com a Familia", null};
+		String nomes[] = {"Transporte", "Transporte Particular", "Saude", "Lazer", "refeicao"};
+		String complementos[] = {"Despesa com transporte publico", "Despesa com transporte prï¿½prio", null, "Atividades com a Familia", null};
 		CategoriaDAO categoriaDAO = new CategoriaDAO();
 		for (int i = 0; i < nomes.length; i++){
 			Categoria categoria = new Categoria();

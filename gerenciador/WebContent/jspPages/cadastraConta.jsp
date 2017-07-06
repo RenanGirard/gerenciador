@@ -29,15 +29,9 @@
 			</p>
 
 			<p>
-				Complemento:<input type="text" name="f_contaBanco"
-					value="${contaBean.banco}" class="form-control" />
-			</p>
-
-
-			<p>
 				<label for="sel1">Banco:</label> 
 				<select class="form-control"
-					id="sel1">
+					id="sel1" name="f_bancoConta">
 					<c:forEach var="banco" items="${bancoBeanList.bancoList}">
 						<option value="${banco.id}">${banco.nome}</option>
 					</c:forEach>
@@ -79,7 +73,7 @@
 
 						<td>${conta.numero}</td>
 
-						<td>${conta.banco}</td>
+						<td>${conta.banco.nome}</td>
 
 						<td><a
 							href=ContaController?action=Editar&f_contaId=${conta.id}>Editar</a></td>

@@ -16,7 +16,8 @@ public class ContaBeanList {
 	public ContaBeanList(List<Conta> contas) {
 		// TODO Auto-generated constructor stub
 		for (Conta conta : contas) {
-			contasBeanList.add(new ContaBean(conta.getId(), conta.getNumero(), conta.getBanco()));
+			contasBeanList.add(new ContaBean(conta.getId(),
+					conta.getNumero(), conta.getBanco(), conta.getUsuario()));
 		}
 	}
 
@@ -27,6 +28,5 @@ public class ContaBeanList {
 	public void setContasBeanList(List<ContaBean> contasBeanList) {
 		this.contasBeanList = contasBeanList;
 	}
-
 
 }

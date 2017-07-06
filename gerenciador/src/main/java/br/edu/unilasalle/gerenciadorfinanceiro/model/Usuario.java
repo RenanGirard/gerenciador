@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,9 +36,8 @@ public class Usuario {
 	@Column(name = "SENHA")
 	private String senha;
 
-	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name = "USUARIO_ID", foreignKey = @ForeignKey(name = "CONTA_USUARIO_FK"),nullable=false)
+	/*@JoinColumn(name = "USUARIO_ID", foreignKey = @ForeignKey(name = "CONTA_USUARIO_FK"), nullable = false)*/
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
 	private Collection<Conta> contas;
 
 	/*

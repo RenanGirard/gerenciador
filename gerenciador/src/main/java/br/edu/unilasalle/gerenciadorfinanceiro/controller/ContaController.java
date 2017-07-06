@@ -22,14 +22,14 @@ import br.edu.unilasalle.gerenciadorfinanceiro.model.Usuario;
 /**
  * Servlet implementation class ContasController
  */
-@WebServlet("/ContasController")
-public class ContasController extends HttpServlet {
+@WebServlet("/ContaController")
+public class ContaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ContasController() {
+	public ContaController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -45,17 +45,18 @@ public class ContasController extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		Usuario usuarioConectado = null;
 		usuarioConectado = (Usuario) request.getSession().getAttribute("usuarioLogado");
 		if (usuarioConectado == null) {
 			request.getRequestDispatcher("/LoginController").forward(request, response);
 		} else {
-			
 
 			String action = request.getParameter("action");
 			Conta conta = null;
@@ -69,8 +70,12 @@ public class ContasController extends HttpServlet {
 					conta = new Conta();
 				}
 				if (action.equals("Salvar")) {
-					String numero = request.getParameter("f_contaNumero") ;
+					String numero = request.getParameter("f_numeroConta");
+					String banco = request.getParameter("f_bancoConta");
+
 					conta.setNumero(Integer.parseInt(numero));
+					conta.setBanco(new BancoDAO().selectById(Long.parseLong(banco)));
+					conta.setUsuario(usuarioConectado);
 					if (conta.getId() == null) {
 						contaDao.insert(conta);
 					} else {
@@ -89,6 +94,8 @@ public class ContasController extends HttpServlet {
 				contaBean = new ContaBean();
 				contaBean.setId(conta.getId());
 				contaBean.setNumero(conta.getNumero());
+				contaBean.setBanco(conta.getBanco());
+				contaBean.setUsuario(usuarioConectado);
 			}
 
 			ContaDAO contadao = new ContaDAO();
@@ -97,16 +104,16 @@ public class ContasController extends HttpServlet {
 
 			request.setAttribute("contaBean", contaBean);
 			request.setAttribute("contaBeanList", contaBeanList);
-			
+
 			BancoDAO bancodao = new BancoDAO();
 			BancoBeanList bancosBeanList = new BancoBeanList(bancodao.selectAll());
 			request.setAttribute("bancoBeanList", bancosBeanList);
-			
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("jspPages/cadastraConta.jsp");
 			dispatcher.forward(request, response);
-			
+
 		}
-	
+
 	}
 
 }

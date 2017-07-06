@@ -65,16 +65,14 @@ public class ContaDAO {
 
 	public List<Conta> selectByUserId(Long id) {
 		// TODO Auto-generated method stub
-		List<Conta> contas = null;
-		EntityManager em = HibernateUtil.getEntityManager();
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Conta> cq = cb.createQuery(Conta.class);
-		Root<Conta> usRoot = cq.from(Conta.class);
-		cq.where(cb.and(cb.equal(usRoot.get("usuario"),id)));		
-		em.getTransaction().begin();
-		contas = em.createQuery("from Conta").getResultList();
-		em.getTransaction().commit();
-		em.close();
-		return contas;
+		Usuario usuario = new Usuario();
+		EntityManager entityManager = HibernateUtil.getEntityManager();
+		entityManager.getTransaction().begin();
+
+		usuario = entityManager.find(Usuario.class, id);
+		List<Conta> contaList = (List<Conta>) usuario.getContas();
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		return contaList;
 	}
 }
